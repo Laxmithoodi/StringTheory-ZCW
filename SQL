@@ -1,0 +1,108 @@
+Databases:
+
+Index- is a data structure that improves speed of data retrieval operations
+
+Indexing - Adding unique to each row
+Relationships: one to one, one to many, many to many
+Schema:
+
+Primary Key-
+ENUM- predefined set of values
+
+Connect to MySQL:
+Host - url or IP address of a server
+Port - default to port of mySql 3306
+Username, Password
+
+
+Derby, Azure to download driver
+
+Create schema zipcode;
+
+Data Types: Date , Time
+
+Date: YYYY-MM-DD
+DateTime- YYYY-MM-DD HH:MM:SS
+Timestamp: YYYYMMDDHHMMSS
+Time: HH:mm:SS
+Year - stores either a 2 digit or 4 digit year
+    Year(2) goes from 1970 to 2069(stored as 70 to 69)
+    Year(4) goes from 1901 to 2155 - 1byte of data
+
+
+Data Types- Strings:
+CHAR(M) - A string of fixed length M
+VARCHAR(M) - A string of varying length between 0 and M.Defauls to 255
+BLOB OR TEXT - a string with max width 65535. Blobs are case sensitive and texts are not
+ENUM- a string that is one ofa predefined list of strings
+    ENUM- ("a","b", "c") can only ever be "a" or "b" or "c"
+
+ALTERING TABLES:
+A table can be altered after it has been created using the ALTER keyword
+https://dev.mysql.com/doc/refman/8.0/en/data-types.html
+
+//add some columns
+ALTER TABLE zipcode.teachers
+    ADD first_name VARCHAR(25) NOT NULL;
+ALTER TABLE zipcode.teachers
+        ADD last_name VARCHAR(25) NOT NULL AFTER id;
+
+//drop Columns
+ALTER TABLE zipcode.teachers  DROP name;
+
+When altering a table, columns are placed at end by default
+
+
+INSERT:
+
+UPDATE:
+
+UPDATE zipcode.teachers  SET first_name = 'Johnathan'  WHERE id =1;
+UPDATE zipcode.teachers  SET speciatlity = 'MIDDLE TIER'
+
+SELECT * FROM zipcode.teachers;
+
+SELECT id, first_name, last_name, speciality FROM zipcodeteacher;
+WHERE Clause:
+Data may be filered using a where clause
+SELECT id, first_name, last_name, speciality FROM zipcodeteacher WHERE speciatlity ='FRONT END';
+
+LIMIT AND ORDER CLAUSE
+Often times when selecting data, we want it to be ordered in osmeway. We can do so by ORDER BY Clause.
+
+SELECT * FROM blog_posts ORDER BY published_at DESC
+
+While for query from before may work for a small blog, it might return too much data if there are hunderds or thousands
+of post. To limit the amount of data return
+
+RELATIONSHIPS:
+JOINS:
+Viewing data in one table can be useful, but often we'll want to see multiple tables data together.
+To do this we use a JOIN.
+2parts - table to join to and fields to compare
+
+SELECT p.name, n.number FROM person p
+JOIN numbers n
+ON p.id = n.person_id;
+
+JOIN - ONE TO MANY
+This Join will connect two tables where 1 row in the first table will
+correspond to many rows in the second.
+
+SELECT p.name, v.model, v.year FROM person p
+JOIN vehicles v
+ON p.id = v.person_id;
+
+JOIN - MANY TO MANY
+we can't logically keep the id's of one table in the other without getting a
+one-toone or one -to-many relationship. To do this we use a pivot table.
+
+SELECT t.first_name, s.name
+FROM teachers t JOIN student_teacher st
+    ON st.teacher_id = t.id
+ JOIN students s
+    ON s.id = t.
+
+
+
+

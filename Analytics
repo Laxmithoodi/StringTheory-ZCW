@@ -1,0 +1,43 @@
+Analytics:
+
+Aggregates: are functions that allow you to run a fucntion down a column rather than on
+each particular row. some of these include
+COUNT
+MAX
+MIN
+SUM
+
+COUNT- gives you total number of rows in a table based on column
+SELECT COUNT(*)  as "count"
+FROM teachers;
+COUNT/3
+Count doesnot consider the values in any column. Simpl add one for each row.
+
+MAX/MIN - gives you larges or smallest value of a column in any row.
+SELECT MAX(years) as "max" MIN(years) as "min"
+FROM zipcode.teachers_meta;
+max- 11
+min - 4
+these will consider data type when doing this sort.
+Text will sort lexographically and numbers will sor numerically.
+
+mysql -u root  - to preform operations from terminal
+
+SUM- take value of a numeric column and add all the values together
+SELECT SUM(years) as "sum"
+FROM zipcode.teachers_meta;
+
+GROUP CONCAT - take a column and concatenates all the rows
+SELECT GROUP_CONCAT(' ', first_name, ' ', last_name) as "group_concant"
+FROM zipcode.teachers
+
+GROUP BY-
+
+HAVING -
+SELECT s.name, COUNT(a_s.assignment_id) as "assignemnt_given"
+FROM zipcode_students s
+JOIN zipcode.assignment_student a_s
+    ON s.id = a_s.student_id
+GROUP BY s.name
+HAVING COUNT();
+
